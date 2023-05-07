@@ -13,11 +13,9 @@ public class SentimentAnalyzer implements Serializable {
 
     private static SentimentAnalyzer instance = null;
     private Properties props;
-    private StanfordCoreNLP pipeline;
     private SentimentAnalyzer(){
         props = new Properties();
         props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse, sentiment");
-        pipeline = new StanfordCoreNLP(props);
     }
     public static SentimentAnalyzer getInstance(){
         if(instance == null){
@@ -27,6 +25,9 @@ public class SentimentAnalyzer implements Serializable {
     }
 
     public Map<String, Integer> getSentiment(String text){
+        // create a pipeline inside the function to avoid the error: java.io.NotSerializableException: edu.stanford.nlp.pipeline.StanfordCoreNLP
+        System.out.println("Text: "+text);
+        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // create a document object
         CoreDocument doc = new CoreDocument(text);
         // annotate

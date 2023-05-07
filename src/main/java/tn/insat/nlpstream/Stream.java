@@ -16,7 +16,7 @@ public class Stream {
                 .setAppName("NetworkWordCount")
                 .setMaster("local[*]");
         JavaStreamingContext jssc =
-                new JavaStreamingContext(conf, Durations.seconds(1));
+                new JavaStreamingContext(conf, Durations.seconds(5));
 
         JavaReceiverInputDStream<String> lines =
                 jssc.socketTextStream("localhost", 9999);
