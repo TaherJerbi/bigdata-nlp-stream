@@ -38,7 +38,7 @@ public class SentimentAnalyzer implements Serializable {
         String body = String.join(",", Arrays.copyOfRange(parts, 2, parts.length-2));
         System.out.println("Body: "+body);
         // create a document object
-        CoreDocument doc = new CoreDocument(text);
+        CoreDocument doc = new CoreDocument(body);
         // annotate
         pipeline.annotate(doc);
 
